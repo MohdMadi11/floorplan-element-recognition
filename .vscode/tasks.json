@@ -1,0 +1,220 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Step 1: Convert floorplan1 PDF to PNG",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/convert_pdf.py",
+        "data/floorplan1.pdf",
+        "--out",
+        "outputs/images",
+        "--dpi",
+        "250"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Step 2: Preprocess floorplan1 PNG",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/preprocess_image.py",
+        "outputs/images/floorplan1_page_1.png",
+        "--out",
+        "outputs/preprocess"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Step 3: Detect floorplan1 wall candidates",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/detect_walls.py",
+        "outputs/images/floorplan1_page_1.png",
+        "--work-dir",
+        "outputs/preprocess",
+        "--out-image",
+        "outputs/annotated/floorplan1_walls.png",
+        "--out-json",
+        "outputs/json/floorplan1_walls.json"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Step 4: Detect floorplan1 column candidates",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/detect_columns.py",
+        "outputs/images/floorplan1_page_1.png",
+        "--work-dir",
+        "outputs/preprocess",
+        "--out-image",
+        "outputs/annotated/floorplan1_columns.png",
+        "--out-json",
+        "outputs/json/floorplan1_columns.json"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Step 5: Detect floorplan1 stair candidates",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/detect_stairs.py",
+        "outputs/images/floorplan1_page_1.png",
+        "--work-dir",
+        "outputs/preprocess",
+        "--out-image",
+        "outputs/annotated/floorplan1_stairs.png",
+        "--out-json",
+        "outputs/json/floorplan1_stairs.json"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Step 6: Detect floorplan1 door candidates",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/detect_doors.py",
+        "outputs/images/floorplan1_page_1.png",
+        "--work-dir",
+        "outputs/preprocess",
+        "--out-image",
+        "outputs/annotated/floorplan1_doors.png",
+        "--out-json",
+        "outputs/json/floorplan1_doors.json"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Step 7: Detect floorplan1 window candidates",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/detect_windows.py",
+        "outputs/images/floorplan1_page_1.png",
+        "--work-dir",
+        "outputs/preprocess",
+        "--out-image",
+        "outputs/annotated/floorplan1_windows.png",
+        "--out-json",
+        "outputs/json/floorplan1_windows.json"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Pipeline: floorplan1",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/run_pipeline.py",
+        "data/floorplan1.pdf",
+        "--out",
+        "outputs",
+        "--dpi",
+        "250"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Pipeline: floorplan2 sanity check",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/run_pipeline.py",
+        "data/floorplan2.pdf",
+        "--out",
+        "outputs",
+        "--dpi",
+        "250"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Pipeline: floorplan3 validation",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/run_pipeline.py",
+        "data/floorplan3.pdf",
+        "--out",
+        "outputs",
+        "--dpi",
+        "250"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Pipeline: floorplan4 final test",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/run_pipeline.py",
+        "data/floorplan4.pdf",
+        "--out",
+        "outputs",
+        "--dpi",
+        "250"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Pipeline: floorplan1 no OCR",
+      "type": "shell",
+      "command": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": [
+        "scripts/run_pipeline.py",
+        "data/floorplan1.pdf",
+        "--out",
+        "outputs",
+        "--dpi",
+        "250",
+        "--no-ocr"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Smoke Test: Convert and preprocess floorplan1",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Step 1: Convert floorplan1 PDF to PNG",
+        "Step 2: Preprocess floorplan1 PNG"
+      ],
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Smoke Test: Convert, preprocess, detect walls",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Step 1: Convert floorplan1 PDF to PNG",
+        "Step 2: Preprocess floorplan1 PNG",
+        "Step 3: Detect floorplan1 wall candidates"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

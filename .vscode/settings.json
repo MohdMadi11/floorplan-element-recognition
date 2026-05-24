@@ -1,0 +1,6 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\madi_\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/src"
+  ]
+}
